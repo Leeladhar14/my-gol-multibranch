@@ -1,7 +1,7 @@
 pipeline{
-        agent { label 'ltecomm' } 
+        agent { label 'ltelearn' } 
         triggers {
-            cron('30 8 * * *')
+            cron('30 11 * * *')
         }
         parameters { 
             choice(name: 'buildstep', choices: ['clean package', 'test', 'package'], description: 'maven build step') 
@@ -9,7 +9,7 @@ pipeline{
         stages {
             stage('scm'){
                 steps{
-                    git branch: 'developer', credentialsId: '46ff2a70-f7b7-48b9-baf3-a786dc140dce', url: 'https://github.com/Leeladhar14/my-gol-multibranch.git'
+                    git branch: 'qa', credentialsId: '46ff2a70-f7b7-48b9-baf3-a786dc140dce', url: 'https://github.com/Leeladhar14/my-gol-multibranch.git'
                 }
             }
             stage('build'){
