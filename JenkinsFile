@@ -1,7 +1,7 @@
 pipeline{
         agent { label 'ltecomm' } 
         triggers {
-            cron('30 8 * * *')
+            cron('* 1 * * *')
         }
         parameters { 
             choice(name: 'buildstep', choices: ['clean package', 'test', 'package'], description: 'maven build step') 
