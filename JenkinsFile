@@ -9,7 +9,7 @@ pipeline{
         stages {
             stage('scm'){
                 steps{
-                    git branch: 'qa', credentialsId: '46ff2a70-f7b7-48b9-baf3-a786dc140dce', url: 'https://github.com/Leeladhar14/my-gol-multibranch.git'
+                    git branch: 'release', credentialsId: '46ff2a70-f7b7-48b9-baf3-a786dc140dce', url: 'https://github.com/Leeladhar14/my-gol-multibranch.git'
                 }
             }
             stage('build'){
