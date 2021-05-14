@@ -1,0 +1,32 @@
+pipeline{
+        agent { label 'ltecomm' } 
+        triggers {
+            cron('30 8 * * *')
+        }
+        parameters { 
+            choice(name: 'buildstep', choices: ['clean package', 'test', 'package'], description: 'maven build step') 
+        }
+        stages {
+            stage('scm'){
+                steps{
+                    git branch: 'developer', credentialsId: '46ff2a70-f7b7-48b9-baf3-a786dc140dce', url: 'https://github.com/Leeladhar14/my-gol-multibranch.git'
+                }
+            }
+            stage('build'){
+                steps{
+                    sh "mvn ${params.buildstep}"
+                }
+            }
+            stage('post build') {
+            steps {
+                junit 'gameoflife-web/target/surefire-reports/*.xml'
+                archiveArtifacts 'gameoflife-web/target/*.war'
+            }
+        }
+        }
+    post{
+        always{
+            echo 'I will always do it at last'
+        }
+    }
+}
