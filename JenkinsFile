@@ -1,8 +1,5 @@
 pipeline{
-        agent { label 'ltelearn' } 
-        triggers {
-            cron('30 11 * * *')
-        }
+        agent { label 'ltelearn' }
         parameters { 
             choice(name: 'buildstep', choices: ['clean package', 'test', 'package'], description: 'maven build step') 
         }
