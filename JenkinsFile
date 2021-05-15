@@ -9,11 +9,13 @@ pipeline{
                     git branch: 'qa', credentialsId: '46ff2a70-f7b7-48b9-baf3-a786dc140dce', url: 'https://github.com/Leeladhar14/my-gol-multibranch.git'
                 }
             }
-            stage('build'){
-                steps{
-                    sh "mvn ${params.buildstep}"
-                }
+            stage('build') {
+            steps {
+                withSonarQubeEnv('SonarQube-6.7'){
+                sh script: 'mvn clean package sonar:sonar'
             }
+            }
+        }
             stage('post build') {
             steps {
                 junit 'gameoflife-web/target/surefire-reports/*.xml'
